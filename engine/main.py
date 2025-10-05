@@ -1,4 +1,5 @@
-from minimax import find_best_move 
+from minimax import best_move 
+from board_utils import userMove
 import chess
 import torch
 import torch.nn as nn
@@ -15,5 +16,5 @@ while not board.is_game_over():
     moves+=1
     print(f"Move {moves}:")
     print(board)
-    board.push(find_best_move(board, 3))
-    board.push(random.choice(list(board.legal_moves)))
+    board.push(best_move(board, 2))
+    print("\n")

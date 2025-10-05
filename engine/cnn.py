@@ -1,4 +1,3 @@
-# engine/cnn.py
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -14,14 +13,13 @@ class ChessEvaluator(nn.Module):
         self.bn3 = nn.BatchNorm2d(256)
 
         self.head = nn.Sequential(
-            nn.Flatten(),                    # 256 * 8 * 8
+            nn.Flatten(),          
             nn.Linear(256 * 8 * 8, 512),
             nn.ReLU(inplace=True),
             nn.Linear(512, 1)
         )
 
     def forward(self, x):
-        # x: [B, input_planes, 8, 8]
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
